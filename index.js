@@ -29,8 +29,39 @@ const calcularValorTotal = (carrito) => {
   return valorTotal;
 }
 
+// tabla que contiene el total del array carrito
+let productoEnElCarrito = document.getElementById("productosEnElCarrito");
+let tablaHTML = `
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+`;
+carrito.forEach(producto => {
+  let imprimirNombre = producto.nombre;
+  let imprimirCantidad = producto.cantidad;
+  tablaHTML += `
+    <tr>
+      <td>${imprimirNombre}</td>
+      <td>${imprimirCantidad}</td>
+    </tr>
+  `;
+});
+tablaHTML += `
+    </tbody>
+  </table>
+`;
+
+productoEnElCarrito.innerHTML = tablaHTML;
+
+
+
 let total = calcularValorTotal(carrito);
 console.table(carrito);
-console.log("El valor total de los tenis Jordan es: $" + total);
+console.log("El valor total de tus Jordan es: $" + total);
 let precioTotalElement = document.getElementById("precioTotal");
-precioTotalElement.innerHTML = `El valor total de los tenis Jordan es: ${total}`;
+precioTotalElement.innerHTML = `El valor total de tus Jordan es: $${total} \u{1F600}`;

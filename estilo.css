@@ -1,3 +1,9 @@
 #precioTotal{
     text-align: center;
 }
+
+.tabla{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
