@@ -30,35 +30,36 @@ const calcularValorTotal = (carrito) => {
 }
 
 // tabla que contiene el total del array carrito
-let productoEnElCarrito = document.getElementById("productosEnElCarrito");
-let tablaHTML = `
-  <table>
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-      </tr>
-    </thead>
-    <tbody>
-`;
-carrito.forEach(producto => {
-  let imprimirNombre = producto.nombre;
-  let imprimirCantidad = producto.cantidad;
-  tablaHTML += `
-    <tr>
-      <td>${imprimirNombre}</td>
-      <td>${imprimirCantidad}</td>
-    </tr>
+const imprimirCarrito = () => {
+  let productoEnElCarrito = document.getElementById("productosEnElCarrito");
+  let tablaHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
   `;
-});
-tablaHTML += `
-    </tbody>
-  </table>
-`;
-
-productoEnElCarrito.innerHTML = tablaHTML;
-
-
+  carrito.forEach(producto => {
+    let imprimirNombre = producto.nombre;
+    let imprimirCantidad = producto.cantidad;
+    tablaHTML += `
+      <tr>
+        <td>${imprimirNombre}</td>
+        <td>${imprimirCantidad}</td>
+      </tr>
+    `;
+  });
+  tablaHTML += `
+      </tbody>
+    </table>
+  `;
+  
+  productoEnElCarrito.innerHTML = tablaHTML;
+}
+imprimirCarrito()
 
 let total = calcularValorTotal(carrito);
 console.table(carrito);
