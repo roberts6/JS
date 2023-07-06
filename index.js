@@ -1,64 +1,36 @@
-/*
 // Definir una lista de precios de tenis Jordan
-let preciosJordan = [150, 200, 180, 220, 250];
+let ZapasJordan = [
+  {nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  // {nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  // {nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  // {nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  // {nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  // {nombre: 'Jordan Air 5', precio: 220, modelo: 'Adultos', genero: 'Niños', cantidad: 0},
+  // {nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Adultos', genero: 'Niños', cantidad: 0}
+];
 
-// Función para calcular el valor total de las zapatillas Jordan
-function calcularValorTotal(cantidad) {
-    var valorTotal = 0;
-  
-    // Ciclo para recorrer la lista de precios y calcular el valor total
-    for (var i = 0; i < preciosJordan.length; i++) {
-      // Verificar si hay suficiente cantidad del producto
-      if (cantidad[i] > 0) {
-        // Calcular el valor del producto multiplicando el precio por la cantidad
-        var valorProducto = preciosJordan[i] * cantidad[i];
-        valorTotal += valorProducto;
-      }
-    }
-  
-    return valorTotal;
-  }
-
-// uso con prompt
-const cantidadTenis = [];
-for (let i = 0; i < preciosJordan.length; i++) {
-  let cantidad = prompt("Ingresa la cantidad de tenis Jordan del modelo " + (i + 1));
-  cantidadTenis.push(parseInt(cantidad));
+// Uso con prompt
+const carrito = [];
+for (let i = 0; i < ZapasJordan.length; i++) {
+  let pedido = prompt(`Ingresa la cantidad de tenis Jordan del modelo ${ZapasJordan[i].nombre} Género: ${ZapasJordan[i].genero}`);
+  console.log(`Quiere ${pedido} del modelo ${ZapasJordan[i].nombre}`);
+  let cantidad = parseInt(ZapasJordan[i].cantidad) + parseInt(pedido);
+  cantidad >= 0 ? carrito.push({ nombre: ZapasJordan[i].nombre,genero: ZapasJordan[i].genero, precio: ZapasJordan[i].precio, cantidad: cantidad, total: (ZapasJordan[i].precio * cantidad)}) : alert('No haz elegido nada');
 }
 
-let total = calcularValorTotal(cantidadTenis);
-console.log("El valor total de los tenis Jordan es: $" + total);
-let precioTotalElement = document.getElementById("precioTotal");
-precioTotalElement.innerHTML = "El valor total de los tenis Jordan es: $" + total;
-*/
-
-// Definir una lista de precios de tenis Jordan
-let preciosJordan = [150, 200, 180, 220, 250];
-
 // Función para calcular el valor total de las zapatillas Jordan
-function calcularValorTotal() {
+const calcularValorTotal = (carrito) => {
   let valorTotal = 0;
-  // Ciclo para recorrer la lista de precios y calcular el valor total
-  for (let i = 0; i < preciosJordan.length; i++) {
-    let cantidad = prompt("Ingresa la cantidad de tenis Jordan del modelo " + (i + 1));
-    cantidad = parseInt(cantidad);
-
-    // Verificar si hay suficiente cantidad del producto
-    if (cantidad > 0) {
-      // Calcular el valor del producto multiplicando el precio por la cantidad
-      let valorProducto = preciosJordan[i] * cantidad;
-      valorTotal += valorProducto;
-    }else{
-      return prompt('No elegiste ninguna de nuestras zapatillas.')
-    }
-  }
-
+  carrito.forEach((producto) => {
+    let precioProducto = ZapasJordan.find(zapa => zapa.nombre === producto.nombre).precio;
+    valorTotal += precioProducto * producto.cantidad;
+  });
   return valorTotal;
 }
 
-// Calcular el valor total
-let total = calcularValorTotal();
-
+let total = calcularValorTotal(carrito);
+console.table(carrito);
 console.log("El valor total de los tenis Jordan es: $" + total);
 let precioTotalElement = document.getElementById("precioTotal");
-precioTotalElement.innerHTML = "El valor total de los tenis Jordan es: $" + total;
+precioTotalElement.innerHTML = `El valor total de los tenis Jordan es: ${total}`;
