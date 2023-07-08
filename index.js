@@ -29,37 +29,58 @@ const calcularValorTotal = (carrito) => {
   return valorTotal;
 }
 
+// Captura el contenedor en el hTML
+let productoEnElCarrito = document.getElementById("productosEnElCarrito");
+
+
 // tabla que contiene el total del array carrito
-const imprimirCarrito = () => {
-  let productoEnElCarrito = document.getElementById("productosEnElCarrito");
-  let tablaHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
-  carrito.forEach(producto => {
-    let imprimirNombre = producto.nombre;
-    let imprimirCantidad = producto.cantidad;
-    tablaHTML += `
-      <tr>
-        <td>${imprimirNombre}</td>
-        <td>${imprimirCantidad}</td>
-      </tr>
-    `;
-  });
-  tablaHTML += `
-      </tbody>
-    </table>
-  `;
+// const imprimirCarrito = () => {
+//   let tablaHTML = `
+//     <table>
+//       <thead>
+//         <tr>
+//           <th>Producto</th>
+//           <th>Cantidad</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//   `;
+//   carrito.forEach(producto => {
+//     let imprimirNombre = producto.nombre;
+//     let imprimirCantidad = producto.cantidad;
+//     tablaHTML += `
+//       <tr>
+//         <td>${imprimirNombre}</td>
+//         <td>${imprimirCantidad}</td>
+//       </tr>
+//     `;
+//   });
+//   tablaHTML += `
+//       </tbody>
+//     </table>
+//   `;
   
-  productoEnElCarrito.innerHTML = tablaHTML;
+//   productoEnElCarrito.innerHTML = tablaHTML;
+// }
+// imprimirCarrito()
+
+const card = (producto) => {
+  return `
+  <div class = "card">
+     <div class = "imgCard"><img src = "${producto.img}"></div>
+     <div class = "imgCard"><p>${producto.nombre} Género: ${producto.genero}</p></div>
+     <div class = "imgCard"><p><b>$${producto.precio}</b></p></div>
+  </div>
+  `
 }
-imprimirCarrito()
+
+const cargarCard = () => {
+ZapasJordan.forEach((producto) => {
+  productoEnElCarrito.innerHTML += card(producto)
+})
+}
+cargarCard()
+
 
 let total = calcularValorTotal(carrito);
 console.table(carrito);
