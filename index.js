@@ -2,22 +2,22 @@
 let ZapasJordan = [
   {nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
   {nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  // {nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  // {nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  // {nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  // {nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  // {nombre: 'Jordan Air 5', precio: 220, modelo: 'Adultos', genero: 'Niños', cantidad: 0},
-  // {nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Adultos', genero: 'Niños', cantidad: 0}
+  {nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {nombre: 'Jordan Air 5', precio: 220, modelo: 'Adultos', genero: 'Niños', cantidad: 0},
+  {nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Adultos', genero: 'Niños', cantidad: 0}
 ];
 
 // Uso con prompt
-const carrito = [];
+const carrito = [];/* 
 for (let i = 0; i < ZapasJordan.length; i++) {
   let pedido = prompt(`Ingresa la cantidad de tenis Jordan del modelo ${ZapasJordan[i].nombre} Género: ${ZapasJordan[i].genero}`);
   console.log(`Quiere ${pedido} del modelo ${ZapasJordan[i].nombre}`);
   let cantidad = parseInt(ZapasJordan[i].cantidad) + parseInt(pedido);
   cantidad >= 0 ? carrito.push({ nombre: ZapasJordan[i].nombre,genero: ZapasJordan[i].genero, precio: ZapasJordan[i].precio, cantidad: cantidad, total: (ZapasJordan[i].precio * cantidad)}) : alert('No haz elegido nada');
-}
+} */
 
 // Función para calcular el valor total de las zapatillas Jordan
 const calcularValorTotal = (carrito) => {
@@ -68,7 +68,8 @@ const card = (producto) => {
   return `
   <div class = "card">
      <div class = "imgCard"><img src = "${producto.img}"></div>
-     <div class = "imgCard"><p>${producto.nombre} Género: ${producto.genero}</p></div>
+     <div class = "imgCard"><p>${producto.nombre}</p></div>
+     <div class = "imgCard"><p>Género: ${producto.genero}</p></div>
      <div class = "imgCard"><p><b>$${producto.precio}</b></p></div>
   </div>
   `
@@ -80,6 +81,21 @@ ZapasJordan.forEach((producto) => {
 })
 }
 cargarCard()
+
+
+const inputSearch = document.querySelector('#buscador')
+
+const buscador = () => {
+  inputSearch.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      let inputSearchResult = inputSearch.value.toLocaleLowerCase();
+      const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult))
+      console.table(resultado)
+      inputSearchResult = ''
+    }
+    })
+}
+buscador()
 
 
 let total = calcularValorTotal(carrito);
