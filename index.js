@@ -1,13 +1,13 @@
 // Definir una lista de precios de tenis Jordan
 let ZapasJordan = [
-  {nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {nombre: 'Jordan Air 5', precio: 220, modelo: 'Adultos', genero: 'Niños', cantidad: 0},
-  {nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Adultos', genero: 'Niños', cantidad: 0}
+  {id:1, nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {id:2, nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {id:3, nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {id:4, nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {id:5, nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {id:6, nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {id:7, nombre: 'Jordan Air 5', precio: 220, modelo: 'Adultos', genero: 'Niños', cantidad: 0},
+  {id:8, nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Adultos', genero: 'Niños', cantidad: 0}
 ];
 
 // Uso con prompt
@@ -20,10 +20,10 @@ for (let i = 0; i < ZapasJordan.length; i++) {
 } */
 
 // Función para calcular el valor total de las zapatillas Jordan
-const calcularValorTotal = (carrito) => {
+const calcularValorTotal = (carrito,productos) => {
   let valorTotal = 0;
   carrito.forEach((producto) => {
-    let precioProducto = ZapasJordan.find(zapa => zapa.nombre === producto.nombre).precio;
+    let precioProducto = productos.find(zapa => zapa.nombre === producto.nombre).precio;
     valorTotal += precioProducto * producto.cantidad;
   });
   return valorTotal;
@@ -72,6 +72,7 @@ const card = (producto) => {
      <div class = "imgCard"><p>${producto.nombre}</p></div>
      <div class = "imgCard"><p>Género: ${producto.genero}</p></div>
      <div class = "imgCard"><p><b>$${producto.precio}</b></p></div>
+     <button class = "botonAgregar" id=${producto.id}>Agregar</button>
   </div>
   `
 }
@@ -88,19 +89,35 @@ cargarCard(ZapasJordan)
 // Funcionalidad del buscador 
 const inputSearch = document.querySelector('#buscador')
 inputSearch.addEventListener('search', () => {
-  const searchValue = inputSearch.value;
-  if (searchValue === '') {
-    cargarCard(ZapasJordan)
-  }else{
-    let inputSearchResult = inputSearch.value.toLocaleLowerCase();
-      const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult))
-      console.table(resultado)
-      cargarCard(resultado)
-      inputSearchResult = ''
-  }
-  
-});
+  const inputSearchResult = inputSearch.value.toLocaleLowerCase();
+  const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult))
+  console.table(resultado)
+  cargarCard(resultado)
+})
 
+// funcionalidad de agregar
+const agregarAlCarrito = () => {
+  const botonAgregar = document.querySelectorAll('button.botonAgregar');
+  botonAgregar.forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const productoSeleccionado = parseInt(boton.id);
+      let meterAlCarrito = ZapasJordan.find((zapa) => zapa.id === productoSeleccionado);
+      if (meterAlCarrito) {
+        const productoEnCarrito = carrito.findIndex((producto) => producto.id === productoSeleccionado);
+        if (productoEnCarrito !== -1) {
+          carrito[productoEnCarrito].cantidad += 1;
+        } else {
+          meterAlCarrito.cantidad = 1;
+          carrito.push(meterAlCarrito);
+        }
+      }
+      console.table(carrito)
+      const valorTotalCarrito = calcularValorTotal(carrito, ZapasJordan);
+      console.log('Valor total del carrito:', valorTotalCarrito);
+    });
+  });
+}
+agregarAlCarrito()
 
 let total = calcularValorTotal(carrito);
 console.table(carrito);
