@@ -64,6 +64,7 @@ let productoEnElCarrito = document.getElementById("productosEnElCarrito");
 // }
 // imprimirCarrito()
 
+// funcionalidad de crear cards 
 const card = (producto) => {
   return `
   <div class = "card">
@@ -74,28 +75,31 @@ const card = (producto) => {
   </div>
   `
 }
-
-const cargarCard = () => {
-ZapasJordan.forEach((producto) => {
+// luego mostrar una card por cada producto en la BDD
+const cargarCard = (array) => {
+  productoEnElCarrito.innerHTML = ''
+  array.forEach((producto) => {
   productoEnElCarrito.innerHTML += card(producto)
 })
 }
-cargarCard()
+cargarCard(ZapasJordan)
 
 
+// Funcionalidad del buscador 
 const inputSearch = document.querySelector('#buscador')
-
-const buscador = () => {
-  inputSearch.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      let inputSearchResult = inputSearch.value.toLocaleLowerCase();
+inputSearch.addEventListener('search', () => {
+  const searchValue = inputSearch.value;
+  if (searchValue === '') {
+    cargarCard(ZapasJordan)
+  }else{
+    let inputSearchResult = inputSearch.value.toLocaleLowerCase();
       const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult))
       console.table(resultado)
+      cargarCard(resultado)
       inputSearchResult = ''
-    }
-    })
-}
-buscador()
+  }
+  
+});
 
 
 let total = calcularValorTotal(carrito);
