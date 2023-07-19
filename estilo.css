@@ -13,7 +13,7 @@ body{
 #precioTotal{
     text-align: center;
     grid-column: 2/6;
-    grid-row: 7;
+    grid-row: 6;
 }
 
 #buscador{
@@ -41,8 +41,15 @@ body{
     min-width: 30%;
 }
 
-#shoppingBag{
+#productosEnBolsa{
     grid-column:6;
     grid-row: 1;
     font-size: 180%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#shoppingBag{
+    margin-right: 10px;
 }

@@ -13,14 +13,19 @@ let ZapasJordan = [
 // Uso con prompt
 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-// Función para calcular el valor total de las zapatillas Jordan
-const calcularValorTotal = (carrito,productos) => {
-  let valorTotal = 0;
-  carrito.forEach((producto) => {
-    let precioProducto = productos.find(zapa => zapa.nombre === producto.nombre).precio;
-    valorTotal += precioProducto * producto.cantidad;
-  });
-  return valorTotal;
+// imprime en HTML el valor total del carrito
+let mostrarPrecio = () => {
+  let precioTotalElement = document.getElementById("precioTotal");
+  let precioEnCarrito = carrito.reduce((total, zapas) => total + (zapas.precio * zapas.cantidad), 0);
+precioTotalElement.innerHTML = `El valor total de tus Jordan es: $${precioEnCarrito} \u{1F600}`;
+}
+
+// imprime en HTML la cantidad total de productos dentro del carrito
+let contador = () => {
+  let contador = document.querySelector('#contador');
+  let cantidadEnCarrito = carrito.reduce((total, zapas) => total + zapas.cantidad, 0);
+console.log(cantidadEnCarrito);
+    contador.innerHTML = `${cantidadEnCarrito}`
 }
 
 // Captura el contenedor en el hTML
@@ -75,16 +80,14 @@ const agregarAlCarrito = () => {
         }
       }
       console.table(carrito)
-      const valorTotalCarrito = calcularValorTotal(carrito, ZapasJordan);
-      console.log('Valor total del carrito:', valorTotalCarrito);
-      let precioTotalElement = document.getElementById("precioTotal");
-precioTotalElement.innerHTML = `El valor total de tus Jordan es: $${valorTotalCarrito} \u{1F600}`;
+contador()
+mostrarPrecio()
     });
   });
 }
 agregarAlCarrito()
 
-const verCarritoEnHTML = () => {
+const eliminarDelCarrito = () => {
   
 }
 
