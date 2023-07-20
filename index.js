@@ -6,8 +6,8 @@ let ZapasJordan = [
   {id:4, nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
   {id:5, nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
   {id:6, nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:7, nombre: 'Jordan Air 5', precio: 220, modelo: 'Adultos', genero: 'Niños', cantidad: 0},
-  {id:8, nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Adultos', genero: 'Niños', cantidad: 0}
+  {id:7, nombre: 'Jordan Air 5', precio: 220, modelo: 'Niños', genero: 'Niñas', cantidad: 0},
+  {id:8, nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Niños', genero: 'Niños', cantidad: 0}
 ];
 
 // Uso con prompt
@@ -16,17 +16,19 @@ const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 // imprime en HTML el valor total del carrito
 let mostrarPrecio = () => {
   let precioTotalElement = document.getElementById("precioTotal");
-  let precioEnCarrito = carrito.reduce((total, zapas) => total + (zapas.precio * zapas.cantidad), 0);
+  let precioEnCarrito = carrito.reduce((total, zapa) => total + (zapa.precio * zapa.cantidad), 0);
 precioTotalElement.innerHTML = `El valor total de tus Jordan es: $${precioEnCarrito} \u{1F600}`;
 }
+mostrarPrecio()
 
 // imprime en HTML la cantidad total de productos dentro del carrito
 let contador = () => {
   let contador = document.querySelector('#contador');
-  let cantidadEnCarrito = carrito.reduce((total, zapas) => total + zapas.cantidad, 0);
+  let cantidadEnCarrito = carrito.reduce((total, zapa) => total + zapa.cantidad, 0);
 console.log(cantidadEnCarrito);
     contador.innerHTML = `${cantidadEnCarrito}`
 }
+contador()
 
 // Captura el contenedor en el hTML
 let productoEnElCarrito = document.getElementById("productosEnElCarrito");
@@ -57,12 +59,13 @@ cargarCard(ZapasJordan)
 const inputSearch = document.querySelector('#buscador')
 inputSearch.addEventListener('search', () => {
   const inputSearchResult = inputSearch.value.toLocaleLowerCase();
-  const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult))
+  const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult) || zapa.genero.toLocaleLowerCase().includes(inputSearchResult) || zapa.modelo.toLocaleLowerCase().includes(inputSearchResult))
   console.table(resultado)
   cargarCard(resultado)
+  agregarAlCarrito()
 })
 
-// funcionalidad de agregar
+// funcionalidad de agregar al carrito
 const agregarAlCarrito = () => {
   const botonAgregar = document.querySelectorAll('button.botonAgregar');
   botonAgregar.forEach((boton) => {
