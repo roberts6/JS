@@ -53,3 +53,29 @@ body{
 #shoppingBag{
     margin-right: 10px;
 }
+
+#tabla{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    grid-column: 2/6;
+    grid-row: 2/6;
+}
+
+#prodEnCheckOut{
+    display: flex;
+
+}
+
+table {     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;    margin: 45px;     width: 480px; text-align: left;    border-collapse: collapse}
+
+th {     font-size: 13px;     font-weight: normal;     padding: 8px;     background: #b9c9fe;
+    border-top: 4px solid #aabcfe;    border-bottom: 1px solid #fff; color: #039; }
+
+td {    padding: 8px;     background: #e8edff;     border-bottom: 1px solid #fff;
+    color: #669;    border-top: 1px solid transparent; text-align: center;}
+
+tr:hover td { background: #d0dafd; color: #339; }

@@ -10,7 +10,25 @@ let ZapasJordan = [
   {id:8, nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Niños', genero: 'Niños', cantidad: 0}
 ];
 
-// Uso con prompt
+/*
+//funciones para crear productos nuevos
+// genera un id automáticamente
+const creaId = () => {
+parseInt(math.random() * 1000000)
+}
+// crea un nuevo objeto en el array BDD
+const crearZapas = () => {
+let id = creaId()
+let nombre = ''
+let precio = 0
+let modelo = ''
+let genero = ''
+let cantidad = 0
+let nuevaZapa = {id: id, nombre: nombre, precio: precio, modelo: modelo, genero: genero, cantidad: cantidad}
+ZapasJordan.push(nuevaZapa)
+}
+*/
+
 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 // imprime en HTML el valor total del carrito
@@ -51,6 +69,7 @@ const cargarCard = (array) => {
   array.forEach((producto) => {
   productoEnElCarrito.innerHTML += card(producto)
 })
+console.table(carrito)
 }
 cargarCard(ZapasJordan)
 
@@ -89,9 +108,3 @@ mostrarPrecio()
   });
 }
 agregarAlCarrito()
-
-const eliminarDelCarrito = () => {
-  
-}
-
-

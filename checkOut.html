@@ -6,11 +6,26 @@
     <link rel="stylesheet" type="text/css" href="./estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script defer src="./index.js"></script>
+    <script defer src="./checkOut.js"></script>
     <title>Oscar Roberts</title>
 </head>
 <body>
-    <h1>Este es el checkout</h1>
-    <!-- <h3 id="productosEnElCarrito" class="tabla"></h3>
-    <h2 id="precioTotal"></h2> -->
+    <div id="tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Nombre</th>
+                    <th>$</th>
+                    <th>Cantidad</th>
+                    <th>Agregar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="prodEnCheckout">
+            </tbody>
+        </table>
+    </div>
+    
 </body>
 </html>
