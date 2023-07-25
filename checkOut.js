@@ -58,28 +58,31 @@ const disminuirCantidadEnCarrito = (productoId) => {
   eliminarDelCarrito();
   
   // Agrega uno más desde el checkout
-  const agregarDesdeCheckOut = (productoId) => {
+  const agregarDesdeCheckOut = () => {
     const botonAgregar = document.querySelectorAll('button.botonAgregar');
     botonAgregar.forEach((boton) => {
       boton.addEventListener('click', () => {
         const productoSeleccionado = parseInt(boton.id);
-        let meterAlCarrito = carrito.find((zapa) => zapa.id === productoSeleccionado);
+        let meterAlCarrito = ZapasJordan.find((zapa) => zapa.id === productoSeleccionado);
         if (meterAlCarrito) {
           const productoEnCarrito = carrito.findIndex((producto) => producto.id === productoSeleccionado);
           if (productoEnCarrito !== -1) {
             carrito[productoEnCarrito].cantidad += 1;
             // Actualiza la cantidad en la celda correspondiente en la tabla
-            const cantidadElement = document.querySelector(`.producto-id-${productoId} .cantidadProducto`);
-        if (cantidadElement) {
-          cantidadElement.textContent = carrito[productoEnCarrito].cantidad;
-        }
+            const cantidadElement = document.querySelector(`.producto-id-${productoSeleccionado} .cantidadProducto`);
+            if (cantidadElement) {
+              cantidadElement.textContent = carrito[productoEnCarrito].cantidad;
+            }
             localStorage.setItem('carrito', JSON.stringify(carrito));
+            cargarCarrito(carrito);
+            mostrarPrecio();
+            contador();
+            console.table(carrito);
           }
-          console.table(carrito);
         }
       });
     });
   };
-  
-  agregarDesdeCheckOut();  
+
+  agregarDesdeCheckOut();
 })
