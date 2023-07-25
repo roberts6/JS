@@ -38,7 +38,15 @@ body{
     border: 3px double yellowgreen;
     margin: 10px;
     padding: 10px;
-    min-width: 30%;
+    width: 30%;
+}
+
+.imgCard{
+    width: 35%;
+}
+
+.imgCheckOut{
+    width: 40%;
 }
 
 #productosEnBolsa{
@@ -50,8 +58,8 @@ body{
     justify-content: center;
 }
 
-#shoppingBag{
-    margin-right: 10px;
+#contador {
+margin-left: 10px;
 }
 
 #tabla{
@@ -82,6 +90,10 @@ th {     font-size: 13px;     font-weight: normal;     padding: 8px;     backgro
 td {    padding: 8px;     background: #e8edff;     border-bottom: 1px solid #fff;
     color: #669;    border-top: 1px solid transparent; text-align: center;}
 
+td .imgCherckOut{
+    width: 28%;
+}
+
 tr:hover td { background: #d0dafd; color: #339; }
 
 #home{
@@ -100,5 +112,7 @@ a .homeJordan{
 
 .contadorEnCheckOut{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    font-size: 35px;
+    align-items: center;
 }

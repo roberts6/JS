@@ -1,13 +1,13 @@
 // Definir una lista de precios de tenis Jordan
 let ZapasJordan = [
-  {id:1, nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {id:2, nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {id:3, nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:4, nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:5, nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {id:6, nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:7, nombre: 'Jordan Air 5', precio: 220, modelo: 'Niños', genero: 'Niñas', cantidad: 0},
-  {id:8, nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Niños', genero: 'Niños', cantidad: 0}
+  {id:1, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {id:2, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {id:3, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {id:4, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {id:5, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
+  {id:6, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
+  {id:7, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 5', precio: 220, modelo: 'Niños', genero: 'Niñas', cantidad: 0},
+  {id:8, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Niños', genero: 'Niños', cantidad: 0}
 ];
 
 /*
@@ -55,10 +55,10 @@ let productoEnElCarrito = document.getElementById("productosEnElCarrito");
 const card = ({img, nombre, precio, genero, id} = producto) => {
   return `
   <div class = "card">
-     <div class = "imgCard"><img src = "${img}"></div>
-     <div class = "imgCard"><p>${nombre}</p></div>
-     <div class = "imgCard"><p>Género: ${genero}</p></div>
-     <div class = "imgCard"><p><b>$${precio}</b></p></div>
+     <div><img class = "imgCard" src = "${img}"></div>
+     <div class = "nombreCard"><p>${nombre}</p></div>
+     <div class = "generoCard"><p>Género: ${genero}</p></div>
+     <div class = "precioCard"><p><b>$${precio}</b></p></div>
      <button class = "botonAgregar" id=${id}>Agregar</button>
   </div>
   `

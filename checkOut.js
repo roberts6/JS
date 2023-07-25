@@ -1,9 +1,8 @@
-const carritoCheckOut = JSON.parse(localStorage.getItem('carrito'))
 document.addEventListener("DOMContentLoaded", () => {
 const tablaCarrito = ({ img, nombre, precio, cantidad, id } = producto) => {
     return `
       <tr id="prod">
-        <td>${img}</td>
+        <td><img class="imgCheckOut" src="${img}"></td>
         <td>${nombre}</td>
         <td>${precio}</td>
         <td class="cantidadProducto producto-id-${id}">${cantidad}</td>
@@ -20,6 +19,7 @@ const tablaCarrito = ({ img, nombre, precio, cantidad, id } = producto) => {
     array.forEach((producto) => {
       prodEnCheckout.innerHTML += tablaCarrito(producto);
     });
+    console.table(carrito)
   };
   cargarCarrito(carrito);
   
@@ -41,7 +41,6 @@ const disminuirCantidadEnCarrito = (productoId) => {
       mostrarPrecio();
       contador();
       localStorage.setItem('carrito', JSON.stringify(carrito));
-      console.table(carrito);
     }
   };  
   
@@ -77,7 +76,6 @@ const disminuirCantidadEnCarrito = (productoId) => {
             cargarCarrito(carrito);
             mostrarPrecio();
             contador();
-            console.table(carrito);
           }
         }
       });
