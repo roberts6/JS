@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-const tablaCarrito = ({ img, nombre, precio, cantidad, id } = producto) => {
+const tablaCarrito = ({ img, nombre, precio, genero, cantidad, id } = producto) => {
     return `
       <tr id="prod">
         <td><img class="imgCheckOut" src="${img}"></td>
         <td>${nombre}</td>
+        <td>${genero}</td>
         <td>${precio}</td>
         <td class="cantidadProducto producto-id-${id}">${cantidad}</td>
         <td><button class="botonAgregar" id=${id}>&#x2795;</button></td>
