@@ -63,6 +63,7 @@ const card = ({img, nombre, precio, genero, id} = producto) => {
   </div>
   `
 }
+
 // luego mostrar una card por cada producto en la BDD
 const cargarCard = (array) => {
   productoEnElCarrito.innerHTML = ''
@@ -94,11 +95,26 @@ const agregarAlCarrito = () => {
       if (meterAlCarrito) {
         const productoEnCarrito = carrito.findIndex((producto) => producto.id === productoSeleccionado);
         if (productoEnCarrito !== -1) {
-          carrito[productoEnCarrito].cantidad += 1;
+          carrito[productoEnCarrito].cantidad ++;
+          localStorage.setItem('carrito',JSON.stringify(carrito))
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Agregado al carrito 🛒',
+            showConfirmButton: false,
+            timer: 1500
+          })
         } else {
           meterAlCarrito.cantidad = 1;
           carrito.push(meterAlCarrito);
           localStorage.setItem('carrito',JSON.stringify(carrito))
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Agregado al carrito 🛒',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }
       console.table(carrito)
@@ -106,5 +122,5 @@ contador()
 mostrarPrecio()
     });
   });
-}
+} 
 agregarAlCarrito()

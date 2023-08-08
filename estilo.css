@@ -116,3 +116,12 @@ a .homeJordan{
     font-size: 35px;
     align-items: center;
 }
+
+.swal2-cancel.btn.btn-danger{
+    margin-right: 30px;
+    background-color: #63F32E;
+}
+
+.swal2-confirm.btn.btn-success{
+    background-color: #F3682C;
+}

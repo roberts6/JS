@@ -12,15 +12,27 @@ const tablaCarrito = ({ img, nombre, precio, genero, cantidad, id } = producto) 
       </tr>
     `;
   };
+
+  const empty = () => {
+    return `
+    <div class = "empty">
+      <h3>Carrito vacío 🛒</h3></div>
+    `
+  }
   
   let prodEnCheckout = document.querySelector("#prodEnCheckout");
-  
+  let tabla = document.querySelector("thead")
+
   const cargarCarrito = (array) => {
     prodEnCheckout.innerHTML = '';
-    array.forEach((producto) => {
-      prodEnCheckout.innerHTML += tablaCarrito(producto);
-    });
-    console.table(carrito)
+    if (carrito.length > 0) {
+      array.forEach((producto) => {
+        prodEnCheckout.innerHTML += tablaCarrito(producto);
+      });
+      console.table(carrito)
+    } else {
+      tabla.innerHTML += empty();
+    }
   };
   cargarCarrito(carrito);
   
@@ -31,12 +43,13 @@ const disminuirCantidadEnCarrito = (productoId) => {
       if (carrito[productoEnCarrito].cantidad > 1) {
         carrito[productoEnCarrito].cantidad -= 1;
         // Actualiza la cantidad en la celda correspondiente en la tabla
-        const cantidadElement = document.querySelector(`.producto-id-${productoId} .cantidadProducto`);
-        if (cantidadElement) {
-          cantidadElement.textContent = carrito[productoEnCarrito].cantidad;
+        const cantidadElemento = document.querySelector(`.producto-id-${productoId} .cantidadProducto`);
+        if (cantidadElemento) {
+          cantidadElemento.textContent = carrito[productoEnCarrito].cantidad;
         }
       } else {
         carrito.splice(productoEnCarrito, 1); // Si la cantidad es 1, eliminar el producto del carrito
+        console.table(carrito)
       }
       cargarCarrito(carrito);
       mostrarPrecio();
@@ -45,43 +58,92 @@ const disminuirCantidadEnCarrito = (productoId) => {
     }
   };  
   
+
+//Sweet alert
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+
   // Elimina un elemento del carrito
   const eliminarDelCarrito = () => {
     const botonEliminar = document.querySelectorAll('button.botonEliminar');
     botonEliminar.forEach((boton) => {
+          boton.addEventListener('click', () => {
+            swalWithBootstrapButtons.fire({
+              title: 'Estás segur@?',
+              text: "Si te arrepentís puede que alguien más se las lleve 🤷🏻‍♂️",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Si, me arriesgo',
+              cancelButtonText: 'No, las quiero!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                  'Eliminadas!',
+                  'Esas zapas increibles ya no están en tu carrito',
+                  'error'
+                )
+                const productoId = parseInt(boton.id);
+            disminuirCantidadEnCarrito(productoId); // Llama a la función para disminuir la cantidad
+              } else if (
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons.fire(
+                  'Buena decisión',
+                  `estas 👟 siguen siendo tuyas`,
+                  'success'
+                )
+              }
+            })
+          });
+        });
+    
+  }
+  eliminarDelCarrito();
+
+  // Suma un elemento desde el checkout
+  const sumarDesdeCheckOut = () => {
+    const botonEliminar = document.querySelectorAll('button.botonAgregar');
+    botonEliminar.forEach((boton) => {
       boton.addEventListener('click', () => {
         const productoId = parseInt(boton.id);
-        disminuirCantidadEnCarrito(productoId); // Llama a la función para disminuir la cantidad
+        agregarAlCarrito(productoId); // Llama a la función para aumentar la cantidad
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Agregado al carrito 🛒',
+          showConfirmButton: false,
+          timer: 1500
+        })
       });
     });
   };
-  eliminarDelCarrito();
+  sumarDesdeCheckOut();
   
-  // Agrega uno más desde el checkout
-  const agregarDesdeCheckOut = () => {
-    const botonAgregar = document.querySelectorAll('button.botonAgregar');
-    botonAgregar.forEach((boton) => {
-      boton.addEventListener('click', () => {
-        const productoSeleccionado = parseInt(boton.id);
-        let meterAlCarrito = ZapasJordan.find((zapa) => zapa.id === productoSeleccionado);
-        if (meterAlCarrito) {
-          const productoEnCarrito = carrito.findIndex((producto) => producto.id === productoSeleccionado);
-          if (productoEnCarrito !== -1) {
-            carrito[productoEnCarrito].cantidad += 1;
-            // Actualiza la cantidad en la celda correspondiente en la tabla
-            const cantidadElement = document.querySelector(`.producto-id-${productoSeleccionado} .cantidadProducto`);
-            if (cantidadElement) {
-              cantidadElement.textContent = carrito[productoEnCarrito].cantidad;
-            }
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            cargarCarrito(carrito);
-            mostrarPrecio();
-            contador();
-          }
-        }
-      });
-    });
-  };
+  // Función para agregar un producto al carrito
+const agregarAlCarrito = (productoId) => {
+  const productoEnCarrito = carrito.find((producto) => producto.id === productoId);
+  
+  if (productoEnCarrito) {
+    // Si el producto ya existe en el carrito, aumenta la cantidad en 1
+    productoEnCarrito.cantidad += 1;
+    // Actualiza la cantidad en la celda correspondiente en la tabla
+    const cantidadElemento = document.querySelector(`.producto-id-${productoId} .cantidadProducto`);
+    if (cantidadElemento) {
+      cantidadElemento.textContent = productoEnCarrito.cantidad;
+    }
+  } 
 
-  agregarDesdeCheckOut();
+  cargarCarrito(carrito);
+  mostrarPrecio();
+  contador();
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+};
+  
 })
