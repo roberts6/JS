@@ -45,8 +45,8 @@ const cargarCarrito = (array) => {
   } else {
     // Ocultar la tabla completa y mostrar el mensaje de carrito vacío
     mostrarElemento(tablaCompleta,false)
-    mostrarElemento(empty,false)
-    mostrarElemento(gracias,true)
+    mostrarElemento(empty,true)
+    mostrarElemento(gracias,false)
   }
 };
 cargarCarrito(carrito);
@@ -65,8 +65,8 @@ const cargarCompraFinal = (array) => {
   } else {
     // Ocultar la tabla completa y mostrar el mensaje de carrito vacío
     mostrarElemento(tablaCompleta,false);
-    mostrarElemento(empty,true);
-    mostrarElemento(gracias,false);
+    //mostrarElemento(empty,false);
+    mostrarElemento(gracias,true);
   }
 };
 
@@ -197,6 +197,7 @@ const home = (array) => {
 home.addEventListener('click', () => {
   if (array.length > 0) {
     localStorage.removeItem('compra final');
+    compraFinal.length = 0;
   }
 })
 }
