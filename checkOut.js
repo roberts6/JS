@@ -14,12 +14,18 @@ const tablaCarrito = ({ img, nombre, precio, genero, cantidad, id } = producto) 
   };
 
   
-  
+  const compraFinal = JSON.parse(localStorage.getItem('compra final')) || []
   let prodEnCheckout = document.querySelector("#prodEnCheckout");
   let tablaCompleta = document.querySelector('#tablaCompleta')
   let empty = document.querySelector('#empty')
+  let gracias = document.querySelector('#gracias')
   tablaCompleta.style.display = "none"
 //contador() = 'cantidad en el carrito 0' ? tablaCompleta.style.display = "none" : cargarCarrito(carrito);
+
+//mostrar u ocultar elementos en el DOM
+const mostrarElemento = (elemento, mostrar) => {
+  elemento.style.display = mostrar ? "flex" : "none";
+};
 
 const cargarCarrito = (array) => {
   prodEnCheckout.innerHTML = '';
@@ -31,18 +37,38 @@ const cargarCarrito = (array) => {
     prodEnCheckout.innerHTML = carritoHTML;
 
     // Mostrar la tabla completa y ocultar el mensaje de carrito vacío
-    tablaCompleta.style.display = "grid";
-    empty.style.display = "none";
+    mostrarElemento(tablaCompleta,true)
+    mostrarElemento(empty,false)
+    mostrarElemento(gracias,false)
 
     console.table(carrito);
   } else {
     // Ocultar la tabla completa y mostrar el mensaje de carrito vacío
-    tablaCompleta.style.display = "none";
-    empty.style.display = "block";
+    mostrarElemento(tablaCompleta,false)
+    mostrarElemento(empty,false)
+    mostrarElemento(gracias,true)
   }
 };
-
 cargarCarrito(carrito);
+
+
+
+const cargarCompraFinal = (array) => {
+  prodEnCheckout.innerHTML = '';
+  if (array.length > 0) {
+    // Mostrar TY page
+    mostrarElemento(tablaCompleta,false);
+    mostrarElemento(empty,false);
+    mostrarElemento(gracias,true);
+
+    console.table(compraFinal);
+  } else {
+    // Ocultar la tabla completa y mostrar el mensaje de carrito vacío
+    mostrarElemento(tablaCompleta,false);
+    mostrarElemento(empty,true);
+    mostrarElemento(gracias,false);
+  }
+};
 
   
   // Función para disminuir la cantidad de un producto en el carrito
@@ -155,4 +181,25 @@ const agregarAlCarrito = (productoId) => {
   localStorage.setItem('carrito', JSON.stringify(carrito));
 };
   
+const finalizarCompra = () => {
+  const botonFinalizarCompra = document.querySelector('button#finalizarCompra')
+  botonFinalizarCompra.addEventListener('click', () => {
+    localStorage.setItem('compra final',JSON.stringify(carrito));
+    localStorage.removeItem('carrito');
+    carrito.length = 0;
+    cargarCompraFinal(compraFinal);
+  })
+}
+finalizarCompra()
+
+const home = (array) => {
+  const home = document.querySelector('.home')
+home.addEventListener('click', () => {
+  if (array.length > 0) {
+    localStorage.removeItem('compra final');
+  }
+})
+}
+home(compraFinal)
+
 })
