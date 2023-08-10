@@ -12,29 +12,40 @@
     <title>Oscar Roberts</title>
 </head>
 <body>
-    <div class="home">
-        <a href="./index.html"><img class="homeJordan" src="./img/zapatillaIcono.svg"></a>
+    
+    <div id="cuerpoCheckout">
+        <div class="home">
+            <a href="./index.html"><img class="homeJordan" src="./img/zapatillaIcono.svg"></a>
+        </div>
+        <div id = "empty">
+            <h3>Carrito vacío 🛒</h3>
+        </div>
+        <div id="tablaCompleta">
+            <div id="tabla">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Nombre</th>
+                            <th>Género</th>
+                            <th>$</th>
+                            <th>Cantidad</th>
+                            <th>Agregar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prodEnCheckout">
+                    </tbody>
+                </table>
+            </div>
+            <div class="totalCheckOut">
+                <div class="contadorEnCheckOut"><p>Productos en tu carrito</p><p id="contador"></p></div>
+                <div id="precioTotal"></div>
+            </div>   
+        </div>
+
     </div>
-    <div id="tabla">
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Nombre</th>
-                    <th>Género</th>
-                    <th>$</th>
-                    <th>Cantidad</th>
-                    <th>Agregar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody id="prodEnCheckout">
-            </tbody>
-        </table>
-    </div>
-    <div class="totalCheckOut">
-        <div class="contadorEnCheckOut"><p>Productos en tu carrito</p><p id="contador"></p></div>
-        <div id="precioTotal"></div>
-    </div>
+    
+    
 </body>
 </html>

@@ -13,28 +13,37 @@ const tablaCarrito = ({ img, nombre, precio, genero, cantidad, id } = producto) 
     `;
   };
 
-  const empty = () => {
-    return `
-    <div class = "empty">
-      <h3>Carrito vacío 🛒</h3></div>
-    `
-  }
+  
   
   let prodEnCheckout = document.querySelector("#prodEnCheckout");
-  let tabla = document.querySelector("thead")
+  let tablaCompleta = document.querySelector('#tablaCompleta')
+  let empty = document.querySelector('#empty')
+  tablaCompleta.style.display = "none"
+//contador() = 'cantidad en el carrito 0' ? tablaCompleta.style.display = "none" : cargarCarrito(carrito);
 
-  const cargarCarrito = (array) => {
-    prodEnCheckout.innerHTML = '';
-    if (carrito.length > 0) {
-      array.forEach((producto) => {
-        prodEnCheckout.innerHTML += tablaCarrito(producto);
-      });
-      console.table(carrito)
-    } else {
-      tabla.innerHTML += empty();
-    }
-  };
-  cargarCarrito(carrito);
+const cargarCarrito = (array) => {
+  prodEnCheckout.innerHTML = '';
+  if (array.length > 0) {
+    let carritoHTML = '';
+    array.forEach((producto) => {
+      carritoHTML += tablaCarrito(producto);
+    });
+    prodEnCheckout.innerHTML = carritoHTML;
+
+    // Mostrar la tabla completa y ocultar el mensaje de carrito vacío
+    tablaCompleta.style.display = "grid";
+    empty.style.display = "none";
+
+    console.table(carrito);
+  } else {
+    // Ocultar la tabla completa y mostrar el mensaje de carrito vacío
+    tablaCompleta.style.display = "none";
+    empty.style.display = "block";
+  }
+};
+
+cargarCarrito(carrito);
+
   
   // Función para disminuir la cantidad de un producto en el carrito
 const disminuirCantidadEnCarrito = (productoId) => {
