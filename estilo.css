@@ -1,13 +1,5 @@
 body{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 3%;
-    justify-items: center;
-    justify-content: center;
+    
 }
 
 #precioTotal{
@@ -16,10 +8,31 @@ body{
     grid-row: 6;
 }
 
+#showImg{
+    text-align: center;
+}
+
+#cuerpo{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(10, 1/2fr 1fr);
+    margin: 3%;
+    justify-items: center;
+}
+
+#header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2/8;
+    grid-row: 1;
+    width: 100%;
+}
+
 #buscador{
     text-align: center;
     width: 20%;
-    grid-column: 2/6;
+    grid-column: 2/4;
     grid-row: 1;
 }
 
@@ -50,12 +63,11 @@ body{
 }
 
 #productosEnBolsa{
-    grid-column:6;
-    grid-row: 1;
     font-size: 180%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 3%;
 }
 
 #contador {
@@ -102,7 +114,7 @@ tr:hover td { background: #d0dafd; color: #339; }
 }
 
 a .homeJordan{
-    width: 50%;
+    width: 12%;
 }
 
 .totalCheckOut{
@@ -124,4 +136,10 @@ a .homeJordan{
 
 .swal2-confirm.btn.btn-success{
     background-color: #F3682C;
+}
+
+#tarjetas{
+    display: grid;
+    grid-row: 2/6;
+    grid-column: 1/9;
 }

@@ -85,7 +85,7 @@ const swalWithBootstrapButtons = Swal.mixin({
             }).then((result) => {
               if (result.isConfirmed) {
                 swalWithBootstrapButtons.fire(
-                  'Eliminadas!',
+                  'Eliminadas! 😭',
                   'Esas zapas increibles ya no están en tu carrito',
                   'error'
                 )

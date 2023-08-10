@@ -35,7 +35,8 @@ const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 let mostrarPrecio = () => {
   let precioTotalElement = document.getElementById("precioTotal");
   let precioEnCarrito = carrito.reduce((total, zapa) => total + (zapa.precio * zapa.cantidad), 0);
-precioTotalElement.innerHTML = `El valor total de tus Jordan es: $${precioEnCarrito} \u{1F600}`;
+  precioEnCarrito > 0 ? 
+precioTotalElement.innerHTML = `El valor total de tus Jordan es: $${precioEnCarrito} 💰` : ''
 }
 mostrarPrecio()
 
@@ -43,8 +44,9 @@ mostrarPrecio()
 let contador = () => {
   let contador = document.querySelector('#contador');
   let cantidadEnCarrito = carrito.reduce((total, zapa) => total + zapa.cantidad, 0);
-console.log(cantidadEnCarrito);
-    contador.innerHTML = `${cantidadEnCarrito}`
+  cantidadEnCarrito > 0 ? 
+  contador.innerHTML = `${cantidadEnCarrito}` : ''
+  console.log('cantidad en el carrito',cantidadEnCarrito)
 }
 contador()
 
@@ -124,3 +126,36 @@ mostrarPrecio()
   });
 } 
 agregarAlCarrito()
+
+// pop up
+document.addEventListener("DOMContentLoaded", () => {
+  const cuerpo = document.querySelector("#cuerpo")
+  const showImg = document.querySelector("#showImg")
+  cuerpo.style.display = "none";
+
+  const displayContent = () => {
+    cuerpo.style.display = "grid";
+    showImg.style.display = "none";
+  };
+
+  // Agrega la imagen al cuerpo y luego muestra el contenido después de 2000 milisegundos (2 segundos)
+  setTimeout(displayContent, 1500);
+});
+
+// API tomada de RapidAPI
+// const url = 'https://jordan-shoes.p.rapidapi.com/shoes/%7Bid%7D';
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '541ed19c62msh0c56db5414ca8eap1a309ajsn3ae8dfc8100d',
+// 		'X-RapidAPI-Host': 'jordan-shoes.p.rapidapi.com'
+// 	}
+// };
+
+// try {
+// 	const response = await fetch(url, options);
+// 	const result = await response.text();
+// 	console.log(result);
+// } catch (error) {
+// 	console.error(error);
+// }
