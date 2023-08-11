@@ -68,7 +68,6 @@ inputSearch.addEventListener('search', () => {
   const resultado = ZapasJordan.filter((zapa) => zapa.nombre.toLocaleLowerCase().includes(inputSearchResult) || zapa.genero.toLocaleLowerCase().includes(inputSearchResult) || zapa.modelo.toLocaleLowerCase().includes(inputSearchResult))
   console.table(resultado)
   cargarCard(resultado)
-  agregarAlCarrito()
 })
 
 // funcionalidad de agregar al carrito
@@ -81,7 +80,7 @@ const agregarAlCarrito = () => {
       if (meterAlCarrito) {
         const productoEnCarrito = carrito.findIndex((producto) => producto.id === productoSeleccionado);
         if (productoEnCarrito !== -1) {
-          carrito[productoEnCarrito].cantidad ++;
+          carrito[productoEnCarrito].cantidad += 1;
           localStorage.setItem('carrito',JSON.stringify(carrito))
           Swal.fire({
             position: 'top-end',
