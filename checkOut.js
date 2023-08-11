@@ -192,9 +192,9 @@ const finalizarCompra = () => {
 }
 finalizarCompra()
 
-const homeBack = (array) => {
+const homeBack = async (array) => {
   const home = document.querySelector('.home')
-  const compraFinal = JSON.parse(localStorage.getItem('compra final'))
+  const compraFinal = await JSON.parse(localStorage.getItem('compra final'))
   home.addEventListener('click', () => {
   if (array.length > 0) {
     localStorage.removeItem('compra final');
