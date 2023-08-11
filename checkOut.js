@@ -192,15 +192,17 @@ const finalizarCompra = () => {
 }
 finalizarCompra()
 
-const home = (array) => {
+const homeBack = (array) => {
   const home = document.querySelector('.home')
-home.addEventListener('click', () => {
+  const compraFinal = JSON.parse(localStorage.getItem('compra final'))
+  home.addEventListener('click', () => {
   if (array.length > 0) {
     localStorage.removeItem('compra final');
     compraFinal.length = 0;
+    console.log('Orden de compra eliminado del localStorage');
   }
 })
 }
-home(compraFinal)
+homeBack(compraFinal)
 
 })

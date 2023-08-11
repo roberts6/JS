@@ -1,33 +1,16 @@
 // Definir una lista de precios de tenis Jordan
-let ZapasJordan = [
-  {id:1, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 1', precio: 150, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {id:2, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 4', precio: 220, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {id:3, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 4', precio: 230, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:4, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 11', precio: 210, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:5, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Retro High OG', precio: 320, modelo: 'Adultos', genero: 'Mujer', cantidad: 0},
-  {id:6, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 5', precio: 300, modelo: 'Adultos', genero: 'hombres', cantidad: 0},
-  {id:7, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Air 5', precio: 220, modelo: 'Niños', genero: 'Niñas', cantidad: 0},
-  {id:8, img: './img/zapatillaColorIcono.svg',nombre: 'Jordan Dunk High Retro', precio: 200, modelo: 'Niños', genero: 'Niños', cantidad: 0}
-];
+let ZapasJordan = [];
 
-/*
-//funciones para crear productos nuevos
-// genera un id automáticamente
-const creaId = () => {
-parseInt(math.random() * 1000000)
+const URL = './zapas.json'
+
+const obtenerInfoZapas = () => {
+  fetch(URL)
+  .then((response) => response.json())
+  .then((data) => ZapasJordan.push(...data))
+  .then(() => cargarCard(ZapasJordan))
+  .catch((error) => console.log(error))
 }
-// crea un nuevo objeto en el array BDD
-const crearZapas = () => {
-let id = creaId()
-let nombre = ''
-let precio = 0
-let modelo = ''
-let genero = ''
-let cantidad = 0
-let nuevaZapa = {id: id, nombre: nombre, precio: precio, modelo: modelo, genero: genero, cantidad: cantidad}
-ZapasJordan.push(nuevaZapa)
-}
-*/
+obtenerInfoZapas()
 
 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -72,9 +55,10 @@ const cargarCard = (array) => {
   array.forEach((producto) => {
   productoEnElCarrito.innerHTML += card(producto)
 })
+agregarAlCarrito()
 console.table(carrito)
 }
-cargarCard(ZapasJordan)
+//cargarCard(ZapasJordan)
 
 
 // Funcionalidad del buscador 
@@ -127,12 +111,12 @@ mostrarPrecio()
 } 
 agregarAlCarrito()
 
-// pop up
+// simulación de carga de página
 document.addEventListener("DOMContentLoaded", () => {
   const cuerpo = document.querySelector("#cuerpo")
   const showImg = document.querySelector("#showImg")
   cuerpo.style.display = "none";
-
+  
   const displayContent = () => {
     cuerpo.style.display = "grid";
     showImg.style.display = "none";
@@ -142,7 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(displayContent, 1500);
 });
 
-// API tomada de RapidAPI
+
+
+// API tomada de RapidAPI --> no la pude hacer funcionar 😔
 // const url = 'https://jordan-shoes.p.rapidapi.com/shoes/%7Bid%7D';
 // const options = {
 // 	method: 'GET',
