@@ -170,13 +170,15 @@ a .homeJordan{
 }
 
 #finalizarCompra{
-    width: 25%;
+    width: 40%;
+    padding: 4%;
     margin: 20px auto 10px;
     background-color: white;
 }
 
-#finalizarCompra :hover{
-background-color: #63F32E;
+#finalizarCompra:hover, .botonAgregar:hover{
+background-color: black;
+color: white;
 }
 
 #gracias{
@@ -185,3 +187,15 @@ background-color: #63F32E;
     align-content: center;
     align-items: center;
 }
+
+.botonAgregarCarrito, .botonEliminar{
+    width: 60%;
+}
+
+.botonAgregar{
+background-color: white;
+width: 20%;
+padding: 1%;
+margin: 2%
+}
+

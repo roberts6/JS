@@ -7,7 +7,7 @@ const tablaCarrito = ({ img, nombre, precio, genero, cantidad, id } = producto) 
         <td>${genero}</td>
         <td>${precio}</td>
         <td class="cantidadProducto producto-id-${id}">${cantidad}</td>
-        <td><button class="botonAgregar" id=${id}>&#x2795;</button></td>
+        <td><button class="botonAgregarCarrito" id=${id}>&#x2795;</button></td>
         <td><button class="botonEliminar" id=${id}>&#x2796;</button></td>
       </tr>
     `;
@@ -144,7 +144,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
   // Suma un elemento desde el checkout
   const sumarDesdeCheckOut = () => {
-    const botonEliminar = document.querySelectorAll('button.botonAgregar');
+    const botonEliminar = document.querySelectorAll('button.botonAgregarCarrito');
     botonEliminar.forEach((boton) => {
       boton.addEventListener('click', () => {
         const productoId = parseInt(boton.id);
