@@ -15,6 +15,10 @@
     text-align: center;
 }
 
+.dropItLogo{
+    width: 35%;
+}
+
 #cuerpo{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -42,9 +46,25 @@
 #buscador{
     text-align: center;
     width: 30%;
-    height: 75%;
+    height: 40%;
     grid-column: 2/4;
     grid-row: 1;
+}
+
+.dropIt{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.dropItNombre{
+    font-size: 40px;
+}
+
+.animate__hinge{
+    margin-left: 3%;
+    width: 45%;
+    animation-duration: calc(var(--animate-duration)*5) !important;
 }
 
 .tabla{
